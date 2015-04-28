@@ -5,7 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.levelmoney.observefragment.FragmentObserver;
-import com.levelmoney.observefragment.ObserveSupportFragment;
+import com.levelmoney.observefragment.IObserveFragment;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -34,7 +34,7 @@ public class Velodrome {
     /**
      * Avoid manually invoking onActivityResult by using ObserveSupportFragment.
      */
-    public Velodrome(ObserveSupportFragment f) {
+    public Velodrome(IObserveFragment f) {
         f.addObserver(new FragmentObserver() {
             @Override
             public void onActivityResult(int requestCode, int resultCode, Intent data) {

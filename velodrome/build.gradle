@@ -1,4 +1,5 @@
 apply plugin: 'com.android.library'
+apply plugin: 'android-maven'
 
 repositories {
     maven { url "https://jitpack.io" }
@@ -21,5 +22,5 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.github.Levelmoney:ObserveFragment:0.3'
+    compile 'com.github.Levelmoney:ObserveFragment:0.5'
 }
