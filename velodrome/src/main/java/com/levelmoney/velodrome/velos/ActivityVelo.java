@@ -24,6 +24,11 @@ public abstract class ActivityVelo implements Velo {
         mTarget = target;
     }
 
+    @Override
+    public int requestCode() {
+        return mRequestCode;
+    }
+
     public void go(Bundle args) {
         Intent i = new Intent(mTarget.getActivity(), mClazz);
         i.putExtras(args);

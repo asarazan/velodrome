@@ -28,6 +28,11 @@ public abstract class DialogFragmentVelo implements Velo {
         mTarget = target;
     }
 
+    @Override
+    public int requestCode() {
+        return mRequestCode;
+    }
+
     public void go(Bundle args) {
         DialogFragment df;
         try {
