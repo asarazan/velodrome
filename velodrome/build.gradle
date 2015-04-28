@@ -29,7 +29,7 @@ uploadArchives {
     repositories.mavenDeployer {
         pom.groupId     = 'com.levelmoney.velodrome'
         pom.artifactId  = 'Velodrome'
-        pom.version     = '0.4'
+        pom.version     = '0.5'
         repository(url: 'file:///' + System.properties['user.home'] + '/personal/maven-repository/')
     }
 }

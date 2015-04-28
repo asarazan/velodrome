@@ -15,10 +15,10 @@ public abstract class ActivityVelo implements Velo {
     private static final String TAG = ActivityVelo.class.getSimpleName();
 
     private final int mRequestCode;
-    private final Class<Activity> mClazz;
+    private final Class<? extends Activity> mClazz;
     private final Fragment mTarget;
 
-    public ActivityVelo(int requestCode, Class<Activity> clazz, Fragment target) {
+    public ActivityVelo(int requestCode, Class<? extends Activity> clazz, Fragment target) {
         mRequestCode = requestCode;
         mClazz = clazz;
         mTarget = target;
