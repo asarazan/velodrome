@@ -34,13 +34,18 @@ public class Velodrome {
     /**
      * Avoid manually invoking onActivityResult by using ObserveSupportFragment.
      */
-    public Velodrome(IObserveFragment f) {
+    public Velodrome(IObserveFragment f, Velo... vs) {
         f.addObserver(new FragmentObserver() {
             @Override
             public void onActivityResult(int requestCode, int resultCode, Intent data) {
                 Velodrome.this.onActivityResult(requestCode, resultCode, data);
             }
         });
+        if (vs != null) {
+            for (Velo v : vs) {
+                add(v);
+            }
+        }
     }
 
     /**
