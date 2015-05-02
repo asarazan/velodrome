@@ -36,7 +36,7 @@ public void onActivityResult(int requestCode, int resultCode, Intent data) {
 ```
 
 ### Install
-We have started using [Jitpack](http://jitpack.io) for all of our open source libraries, so add the following to your app's build.gradle file:
+The Android team has started using [Jitpack](http://jitpack.io) for all of our open source libraries, so add the following to your app's build.gradle file:
 
 ```groovy
 repositories {
