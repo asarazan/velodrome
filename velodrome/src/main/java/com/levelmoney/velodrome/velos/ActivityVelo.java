@@ -16,22 +16,31 @@ public abstract class ActivityVelo implements Velo {
 
     private final int mRequestCode;
     private final Class<? extends Activity> mClazz;
-    private final Fragment mTarget;
+    private final Activity mTargetA;
+    private final Fragment mTargetF;
 
-    public ActivityVelo(int requestCode, Class<? extends Activity> clazz, Fragment target) {
+    public ActivityVelo(Activity target, int requestCode, Class<? extends Activity> clazz) {
         mRequestCode = requestCode;
         mClazz = clazz;
-        mTarget = target;
+        mTargetA = target;
+        mTargetF = null;
     }
 
-    @Override
-    public int requestCode() {
-        return mRequestCode;
+    public ActivityVelo(Fragment target, int requestCode, Class<? extends Activity> clazz) {
+        mRequestCode = requestCode;
+        mClazz = clazz;
+        mTargetA = null;
+        mTargetF = target;
     }
 
     public void go(Bundle args) {
-        Intent i = new Intent(mTarget.getActivity(), mClazz);
-        i.putExtras(args);
-        mTarget.startActivityForResult(i, mRequestCode);
+        Activity a = mTargetA != null ? mTargetA : mTargetF.getActivity();
+        Intent i = new Intent(a, mClazz);
+        if (args != null) i.putExtras(args);
+        if (mTargetA != null) {
+            mTargetA.startActivityForResult(i, mRequestCode);
+        } else {
+            mTargetF.startActivityForResult(i, mRequestCode);
+        }
     }
 }
