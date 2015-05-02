@@ -10,6 +10,6 @@ repositories {
 }
 
 dependencies {
-  compile 'com.github.Levelmoney:Velodrome:0.6' // or whatever the latest version is.
+  compile 'com.github.Levelmoney:Velodrome:0.7' // or whatever the latest version is.
 }
 ```
