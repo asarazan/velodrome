@@ -38,3 +38,7 @@ dependencies {
   compile 'com.github.Levelmoney:Velodrome:0.7' // or whatever the latest version is.
 }
 ```
+
+### Known Issues
+* Does not currently operate as a compilation processor. Pull requests welcome.
+* Temporarily calls `setAccessible(true)` on fields during onHandle. Would be unnecessary at compile-time.
