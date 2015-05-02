@@ -10,11 +10,20 @@ A more reasonable approach is to encapsulate each piece of callback behavior int
 
 ```java
 // In your fragment or activity class.
-@ResultHandler(1234)
+@ResultHandler(1)
 private Velo mSomeHandler = new Velo() {
     @Override
     public boolean handleResult(int resultCode, Intent data) {
         // Do something here.
+        return true;
+    }
+}
+
+@ResultHandler(2)
+private Velo mAnotherHandler = new Velo() {
+    @Override
+    public boolean handleResult(int resultCode, Intent data) {
+        // Do something else here.
         return true;
     }
 }
