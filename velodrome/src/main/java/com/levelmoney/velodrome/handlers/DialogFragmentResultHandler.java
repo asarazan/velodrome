@@ -28,6 +28,11 @@ public abstract class DialogFragmentResultHandler implements ResultHandler {
         mTarget = target;
     }
 
+    @Override
+    public int requestCode() {
+        return mRequestCode;
+    }
+
     public void go(Bundle args) {
         DialogFragment df;
         try {

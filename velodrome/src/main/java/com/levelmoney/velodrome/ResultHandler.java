@@ -9,6 +9,11 @@ import android.content.Intent;
 public interface ResultHandler {
 
     /**
+     * What code do we listen for in onActivityResult?
+     */
+    int requestCode();
+
+    /**
      * What do we do with the result once we get it?
      * Velodrome automatically filters out !RESULT_OK
      */

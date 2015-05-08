@@ -33,6 +33,11 @@ public abstract class ActivityResultHandler implements ResultHandler {
         mTargetF = target;
     }
 
+    @Override
+    public int requestCode() {
+        return mRequestCode;
+    }
+
     public void go(Bundle args) {
         Activity a = mTargetA != null ? mTargetA : mTargetF.getActivity();
         Intent i = new Intent(a, mClazz);

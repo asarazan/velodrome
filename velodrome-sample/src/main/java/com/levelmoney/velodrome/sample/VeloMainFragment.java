@@ -9,12 +9,9 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.levelmoney.velodrome.Velodrome;
-import com.levelmoney.velodrome.annotations.Result;
+import com.levelmoney.velodrome.annotations.ResultHandler;
 import com.levelmoney.velodrome.handlers.ActivityResultHandler;
 import com.levelmoney.velodrome.handlers.DialogFragmentResultHandler;
-import com.levelmoney.velodrome.sample.EditTextActivity;
-import com.levelmoney.velodrome.sample.R;
-import com.levelmoney.velodrome.sample.VeloDialogFragment;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -28,7 +25,7 @@ public class VeloMainFragment extends Fragment {
     private final int CODE_ACTIVITY = 1234;
     private final int CODE_DIALOG = 100;
 
-    @Result(CODE_ACTIVITY)
+    @ResultHandler
     private final ActivityResultHandler mActivity =
             new ActivityResultHandler(this, CODE_ACTIVITY, EditTextActivity.class) {
                 @Override
@@ -37,7 +34,7 @@ public class VeloMainFragment extends Fragment {
                 }
             };
 
-    @Result(CODE_DIALOG)
+    @ResultHandler
     private final DialogFragmentResultHandler mDialog =
             new DialogFragmentResultHandler(this, CODE_DIALOG, VeloDialogFragment.class) {
                 @Override
