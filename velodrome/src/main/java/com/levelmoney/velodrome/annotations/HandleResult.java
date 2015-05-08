@@ -12,6 +12,6 @@ import static java.lang.annotation.ElementType.FIELD;
  */
 @Retention(RUNTIME)
 @Target(FIELD)
-public @interface ResultHandler {
+public @interface HandleResult {
 
 }
