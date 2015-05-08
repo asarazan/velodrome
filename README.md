@@ -48,7 +48,7 @@ val handler = resultHandler(3) {
 
 override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
     super.onActivityResult(requestCode, resultCode, data)
-    Velodrome.handleResult(requestCode, resultCode, data)
+    Velodrome.handleResult(this, requestCode, resultCode, data)
 }
 ```
 
