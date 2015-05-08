@@ -37,12 +37,12 @@ public void onActivityResult(int requestCode, int resultCode, Intent data) {
 ```kotlin
 // Inside a fragment or activity class.
 [ResultHandler]
-val aLauncher = activityLauncher(3, javaClass<SomeActivity>()) {
+val aLauncher = activityLauncher(2, javaClass<SomeActivity>()) {
     Log.d(TAG, it.getStringExtra("result")
 }
 
 [ResultHandler]
-val handler = resultHandler(SOME_CODE) {
+val handler = resultHandler(3) {
     Log.d(TAG, it.getStringExtra("result")
 }
 ```
