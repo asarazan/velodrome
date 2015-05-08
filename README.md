@@ -36,8 +36,13 @@ public void onActivityResult(int requestCode, int resultCode, Intent data) {
 ### Kotlin Usage
 ```kotlin
 // Inside a fragment or activity class.
-[Result]
+[ResultHandler]
 val aLauncher = activityLauncher(3, javaClass<SomeActivity>()) {
+    Log.d(TAG, it.getStringExtra("result")
+}
+
+[ResultHandler]
+val handler = resultHandler(SOME_CODE) {
     Log.d(TAG, it.getStringExtra("result")
 }
 ```
