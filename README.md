@@ -45,6 +45,11 @@ val aLauncher = activityLauncher(2, javaClass<SomeActivity>()) {
 val handler = resultHandler(3) {
     Log.d(TAG, it.getStringExtra("result")
 }
+
+override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+    super.onActivityResult(requestCode, resultCode, data)
+    Velodrome.handleResult(requestCode, resultCode, data)
+}
 ```
 
 ### Install
