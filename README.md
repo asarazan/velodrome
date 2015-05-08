@@ -10,21 +10,31 @@ A more reasonable approach is to encapsulate each piece of callback behavior int
 
 ```java
 // In your fragment or activity class.
-@ResultHandler(1)
-private Velo mSomeHandler = new Velo() {
+@ResultHandler
+private ResultHandler mSomeHandler = new Velo() {
+
     @Override
-    public boolean handleResult(int resultCode, Intent data) {
+    public int requestCode() {
+        return 0;
+    }
+    
+    @Override
+    public void handleResult(int resultCode, Intent data) {
         // Do something here.
-        return true;
     }
 }
 
-@ResultHandler(2)
-private Velo mAnotherHandler = new Velo() {
+@ResultHandler
+private ResultHandler mAnotherHandler = new Velo() {
+
     @Override
-    public boolean handleResult(int resultCode, Intent data) {
+    public int requestCode() {
+        return 1;
+    }
+    
+    @Override
+    public void handleResult(Intent data) {
         // Do something else here.
-        return true;
     }
 }
 
@@ -38,7 +48,7 @@ public void onActivityResult(int requestCode, int resultCode, Intent data) {
 ### Kotlin Usage
 ```kotlin
 // Inside a fragment or activity class.
-[Result(SOME_CODE)]
+[Result]
 val aLauncher = activityLauncher(SOME_CODE, javaClass<SomeActivity>()) {
     Log.d(TAG, it.getStringExtra("result")
 }
