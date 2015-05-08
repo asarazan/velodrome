@@ -10,7 +10,7 @@ A more reasonable approach is to encapsulate each piece of callback behavior int
 
 ```java
 // In your fragment or activity class.
-@ResultHandler
+@HandleResult
 private ResultHandler mSomeHandler = new BasicResultHandler(0) {
     @Override
     public void handleResult(Intent data) {
@@ -18,7 +18,7 @@ private ResultHandler mSomeHandler = new BasicResultHandler(0) {
     }
 }
 
-@ResultHandler
+@HandleResult
 private ResultHandler mAnotherHandler = new BasicResultHandler(1) {
     @Override
     public void handleResult(Intent data) {
@@ -36,12 +36,12 @@ public void onActivityResult(int requestCode, int resultCode, Intent data) {
 ### Kotlin Usage
 ```kotlin
 // Inside a fragment or activity class.
-[ResultHandler]
+[HandleResult]
 val aLauncher = activityLauncher(2, javaClass<SomeActivity>()) {
     Log.d(TAG, it.getStringExtra("result")
 }
 
-[ResultHandler]
+[HandleResult]
 val handler = resultHandler(3) {
     Log.d(TAG, it.getStringExtra("result")
 }
@@ -50,8 +50,8 @@ val handler = resultHandler(3) {
 ### Install
 ```gradle
 dependencies {
-    compile 'com.levelmoney.velodrome:velodrome:1.0'
+    compile 'com.levelmoney.velodrome:velodrome:1.0@aar'
     // OR
-    compile 'com.levelmoney:velodrome:velodrome-kotlin:1.0'
+    compile 'com.levelmoney:velodrome:velodrome-kotlin:1.0@aar'
 }
 ```
