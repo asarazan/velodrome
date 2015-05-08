@@ -45,6 +45,8 @@ val aLauncher = activityLauncher(3, javaClass<SomeActivity>()) {
 ### Install
 ```gradle
 dependencies {
-  compile 'com.github.Levelmoney:Velodrome:1.0' // or whatever the latest version is.
+    compile 'com.levelmoney.velodrome:velodrome:1.0'
+    // OR
+    compile 'com.levelmoney:velodrome:velodrome-kotlin:1.0'
 }
 ```
