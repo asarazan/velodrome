@@ -18,6 +18,7 @@ package com.levelmoney.velodrome.sample;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -45,7 +46,7 @@ public class VeloMainFragment extends Fragment {
     private final ActivityResultHandler mActivity =
             new ActivityResultHandler(this, CODE_ACTIVITY, EditTextActivity.class) {
                 @Override
-                public void handleResult(Intent data) {
+                public void handleResult(@Nullable Intent data) {
                     Toast.makeText(getActivity(), data.getStringExtra("text"), Toast.LENGTH_LONG).show();
                 }
             };
@@ -54,7 +55,7 @@ public class VeloMainFragment extends Fragment {
     private final DialogFragmentResultHandler mDialog =
             new DialogFragmentResultHandler(this, CODE_DIALOG, VeloDialogFragment.class) {
                 @Override
-                public void handleResult(Intent data) {
+                public void handleResult(@Nullable Intent data) {
                     Toast.makeText(getActivity(), "Confirmed", Toast.LENGTH_LONG).show();
                 }
             };
