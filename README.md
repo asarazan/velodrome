@@ -1,12 +1,12 @@
 # Velodrome
-An experimental Android library that attempts to simplify the `onActivityResult` flow.
+A small Android library that attempts to simplify the `onActivityResult` flow.
 
 ### Thesis
 One of the more horrible pieces of the Android lifecycle occurs inside `onActivityResult`. It inevitably descends into a mess of switch statements and spaghetti.
 
-A more reasonable approach is to encapsulate each piece of callback behavior into its own object. That is [Velodrome](http://en.wikipedia.org/wiki/Velodrome).
+A more reasonable approach is to encapsulate each piece of callback behavior into its own object. That is precisely what [Velodrome](http://en.wikipedia.org/wiki/Velodrome) does.
 
-### Usage
+### Java Usage
 
 ```java
 // In your fragment or activity class.
@@ -32,6 +32,15 @@ private Velo mAnotherHandler = new Velo() {
 public void onActivityResult(int requestCode, int resultCode, Intent data) {
     super.onActivityResult(requestCode, resultCode, data);
     Velodrome.handleResult(this, requestCode, resultCode, data);
+}
+```
+
+### Kotlin Usage
+```kotlin
+// Inside a fragment or activity class.
+[Result(SOME_CODE)]
+val aLauncher = activityLauncher(SOME_CODE, javaClass<SomeActivity>()) {
+    Log.d(TAG, it.getStringExtra("result")
 }
 ```
 
