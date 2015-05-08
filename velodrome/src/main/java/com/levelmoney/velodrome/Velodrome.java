@@ -18,6 +18,7 @@ package com.levelmoney.velodrome;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.support.annotation.Nullable;
 
 import com.levelmoney.velodrome.annotations.HandleResult;
 
@@ -39,7 +40,7 @@ public final class Velodrome {
      */
     private Velodrome() {}
 
-    public static boolean handleResult(Object target, int requestCode, int resultCode, Intent data) {
+    public static boolean handleResult(Object target, int requestCode, int resultCode, @Nullable Intent data) {
         if (resultCode != Activity.RESULT_OK) return false;
         for (Field f : target.getClass().getDeclaredFields()) {
             HandleResult h = f.getAnnotation(HandleResult.class);
