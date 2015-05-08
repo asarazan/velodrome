@@ -43,8 +43,6 @@ val aLauncher = activityLauncher(3, javaClass<SomeActivity>()) {
 ```
 
 ### Install
-The Android team has started using [Jitpack](http://jitpack.io) for all of our open source libraries, so add the following to your app's build.gradle file:
-
 ```gradle
 dependencies {
   compile 'com.github.Levelmoney:Velodrome:1.0' // or whatever the latest version is.
