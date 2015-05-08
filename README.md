@@ -45,16 +45,8 @@ val aLauncher = activityLauncher(3, javaClass<SomeActivity>()) {
 ### Install
 The Android team has started using [Jitpack](http://jitpack.io) for all of our open source libraries, so add the following to your app's build.gradle file:
 
-```groovy
-repositories {
-    maven { url "https://jitpack.io" }
-}
-
+```gradle
 dependencies {
-  compile 'com.github.Levelmoney:Velodrome:0.7' // or whatever the latest version is.
+  compile 'com.github.Levelmoney:Velodrome:1.0' // or whatever the latest version is.
 }
 ```
-
-### Known Issues
-* Does not currently operate as a compilation processor. Pull requests welcome.
-* Temporarily calls `setAccessible(true)` on fields during onHandle. Would be unnecessary at compile-time.
