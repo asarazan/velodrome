@@ -17,6 +17,7 @@
 package com.levelmoney.velodrome;
 
 import android.content.Intent;
+import android.support.annotation.Nullable;
 
 public interface ResultHandler {
 
@@ -29,6 +30,6 @@ public interface ResultHandler {
      * What do we do with the result once we get it?
      * Velodrome automatically filters out !RESULT_OK
      */
-    void handleResult(Intent data);
+    void handleResult(@Nullable Intent data);
 
 }
