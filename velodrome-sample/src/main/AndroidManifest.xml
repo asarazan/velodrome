@@ -9,21 +9,17 @@
         android:theme="@style/AppTheme" >
         <activity
             android:name=".EditTextActivity"
-            android:label="@string/title_activity_edit_text"
-            android:parentActivityName=".VeloMainActivity" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.levelmoney.velodrome.sample.VeloMainActivity" />
-        </activity>
+            android:label="@string/title_activity_edit_text"/>
+
         <activity
             android:name=".VeloMainActivity"
             android:label="@string/title_activity_velo_main" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
     </application>
 
 </manifest>

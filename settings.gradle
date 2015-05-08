@@ -1,1 +1,1 @@
-include ':velodrome', ':velodrome-sample'
+include ':velodrome', ':velodrome-sample', ':velodrome-kotlin'

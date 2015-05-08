@@ -1,6 +1,9 @@
 package com.levelmoney.velodrome;
 
+import android.app.Activity;
 import android.content.Intent;
+
+import com.levelmoney.velodrome.annotations.Result;
 
 import java.lang.reflect.Field;
 
@@ -24,15 +27,17 @@ public final class Velodrome {
     private Velodrome() {}
 
     public static boolean handleResult(Object target, int requestCode, int resultCode, Intent data) {
+        if (resultCode != Activity.RESULT_OK) return false;
         for (Field f : target.getClass().getDeclaredFields()) {
-            ResultHandler h = f.getAnnotation(ResultHandler.class);
+            Result h = f.getAnnotation(Result.class);
             if (h != null && h.value() == requestCode) {
                 boolean accessible = f.isAccessible();
                 try {
                     // We can get rid of this when we switch to compile-time processing.
                     f.setAccessible(true);
-                    Velo v = (Velo) f.get(target);
-                    if (v.handleResult(resultCode, data)) return true;
+                    ResultHandler v = (ResultHandler) f.get(target);
+                    v.handleResult(data);
+                    return true;
                 } catch (IllegalAccessException e) {
                     throw new RuntimeException(e);
                 } finally {
@@ -40,7 +45,6 @@ public final class Velodrome {
                 }
             }
         }
-
         return false;
     }
 }

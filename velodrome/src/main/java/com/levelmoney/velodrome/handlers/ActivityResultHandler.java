@@ -1,32 +1,32 @@
-package com.levelmoney.velodrome.velos;
+package com.levelmoney.velodrome.handlers;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 
-import com.levelmoney.velodrome.Velo;
+import com.levelmoney.velodrome.ResultHandler;
 
 /**
  * Created by Aaron Sarazan on 4/26/15
  * Copyright(c) 2015 Level, Inc.
  */
-public abstract class ActivityVelo implements Velo {
-    private static final String TAG = ActivityVelo.class.getSimpleName();
+public abstract class ActivityResultHandler implements ResultHandler {
+    private static final String TAG = ActivityResultHandler.class.getSimpleName();
 
     private final int mRequestCode;
     private final Class<? extends Activity> mClazz;
     private final Activity mTargetA;
     private final Fragment mTargetF;
 
-    public ActivityVelo(Activity target, int requestCode, Class<? extends Activity> clazz) {
+    public ActivityResultHandler(Activity target, int requestCode, Class<? extends Activity> clazz) {
         mRequestCode = requestCode;
         mClazz = clazz;
         mTargetA = target;
         mTargetF = null;
     }
 
-    public ActivityVelo(Fragment target, int requestCode, Class<? extends Activity> clazz) {
+    public ActivityResultHandler(Fragment target, int requestCode, Class<? extends Activity> clazz) {
         mRequestCode = requestCode;
         mClazz = clazz;
         mTargetA = null;
