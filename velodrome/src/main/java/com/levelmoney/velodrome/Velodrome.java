@@ -31,14 +31,12 @@ import java.lang.reflect.Field;
  * If it uses onActivityResult, it can probably benefit from this framework.
  */
 public final class Velodrome {
-    private static final String TAG = Velodrome.class.getSimpleName();
 
-    /**
-     * If you don't have an ObserveSupportFragment, you'll have to do it the old fashioned way.
-     * Remember to call through to handleResult from your Fragment/Activity.
-     */
     private Velodrome() {}
 
+    /**
+     * Call this method from onActivityResult
+     */
     public static boolean handleResult(Object target, int requestCode, int resultCode, @Nullable Intent data) {
         if (resultCode != Activity.RESULT_OK) return false;
         for (Field f : target.getClass().getDeclaredFields()) {
