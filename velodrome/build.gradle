@@ -1,9 +1,4 @@
 apply plugin: 'com.android.library'
-apply plugin: 'maven'
-
-repositories {
-    maven { url 'https://jitpack.io' }
-}
 
 android {
     compileSdkVersion 22
@@ -22,6 +17,9 @@ android {
 
 dependencies {
     compile 'com.android.support:support-v4:22.1.1'
+
+    testCompile 'junit:junit:4.12'
+    testCompile 'org.robolectric:robolectric:3.0-rc2'
 }
 
 apply from: '../gradle/gradle-mvn-push.gradle'
