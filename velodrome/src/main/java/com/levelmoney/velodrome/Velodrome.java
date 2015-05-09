@@ -26,10 +26,9 @@ import java.lang.reflect.Field;
 
 /**
  * It handles lots of lifecycle stuff. Get it?
- * Eh maybe Tre can come up with a better name.
  *
- * Anyway this is an attempt to streamline the awkwardness of dealing with request codes.
- * If it uses handleResult, it can probably benefit from this framework.
+ * This is an attempt to streamline the awkwardness of dealing with request codes.
+ * If it uses onActivityResult, it can probably benefit from this framework.
  */
 public final class Velodrome {
     private static final String TAG = Velodrome.class.getSimpleName();
