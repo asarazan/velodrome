@@ -16,14 +16,14 @@ public void onActivityReturn(Intent data) {
     Log.d("Velo", data.getStringExtra("text"));
 }
 
-@HandleResult(value = 1, resultCode = Activity.RESULT_CANCELED)
-public void onDialogCancel(Intent data) {
-    Log.d("Velo", "Canceled");
-}
-
 @HandleResult({2, 3})
 public void onMultipleCodes(Intent data) {
     Log.d("Velo", "one of two possible things just happened.");
+}
+
+@HandleResult(value = 1, resultCode = Activity.RESULT_CANCELED)
+public void onDialogCancel(Intent data) {
+    Log.d("Velo", "Canceled");
 }
 
 @Override
