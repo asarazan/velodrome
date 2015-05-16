@@ -57,7 +57,7 @@ public class VeloMainFragment extends Fragment {
     }
 
     @HandleResult(CODE_ACTIVITY)
-    void onActivityReturn(Intent data) {
+    public void onActivityReturn(Intent data) {
         Toast.makeText(getActivity(), data.getStringExtra("text"), Toast.LENGTH_LONG).show();
     }
 
