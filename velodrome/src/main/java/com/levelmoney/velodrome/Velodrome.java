@@ -17,7 +17,6 @@
 package com.levelmoney.velodrome;
 
 import android.content.Intent;
-import android.support.annotation.Nullable;
 
 import com.levelmoney.velodrome.annotations.HandleResult;
 
@@ -37,7 +36,7 @@ public final class Velodrome {
     /**
      * Call this method from onActivityResult
      */
-    public static synchronized boolean handleResult(Object target, int requestCode, int resultCode, @Nullable Intent data) {
+    public static synchronized boolean handleResult(Object target, int requestCode, int resultCode, Intent data) {
         for (Method m : target.getClass().getMethods()) {
             HandleResult ann = m.getAnnotation(HandleResult.class);
             if (ann != null) {

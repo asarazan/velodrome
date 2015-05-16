@@ -2,7 +2,6 @@ package com.levelmoney.velodrome.test;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.support.annotation.Nullable;
 
 import com.levelmoney.velodrome.Velodrome;
 import com.levelmoney.velodrome.annotations.HandleResult;
@@ -111,7 +110,7 @@ public class VelodromeTests {
         assertEquals(mTarget.getValue(), 2);
     }
 
-    private static Intent intent(@Nullable Integer value) {
+    private static Intent intent(Integer value) {
         Intent retval = new Intent(ShadowApplication.getInstance().getApplicationContext(), Activity.class);
         if (value != null) retval.putExtra("value", value);
         return retval;
