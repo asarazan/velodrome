@@ -36,6 +36,6 @@ public void onActivityResult(int requestCode, int resultCode, Intent data) {
 ### Install
 ```gradle
 dependencies {
-    compile 'com.levelmoney.velodrome:velodrome:1.0-SNAPSHOT@aar'
+    compile 'com.levelmoney.velodrome:velodrome:0.9-SNAPSHOT@aar'
 }
 ```
