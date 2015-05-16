@@ -16,6 +16,7 @@
 
 package com.levelmoney.velodrome.sample;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -70,6 +71,11 @@ public class VeloMainFragment extends Fragment {
     @HandleResult(CODE_DIALOG)
     public void onDialogReturn(Intent data) {
         Toast.makeText(getActivity(), "Confirmed", Toast.LENGTH_LONG).show();
+    }
+
+    @HandleResult(value = CODE_DIALOG, resultCode = Activity.RESULT_CANCELED)
+    public void onDialogCancel(Intent data) {
+        Toast.makeText(getActivity(), "Canceled", Toast.LENGTH_LONG).show();
     }
 
     @Override

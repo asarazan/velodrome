@@ -16,7 +16,6 @@
 
 package com.levelmoney.velodrome;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.support.annotation.Nullable;
 
@@ -43,7 +42,7 @@ public final class Velodrome {
             HandleResult ann = m.getAnnotation(HandleResult.class);
             if (ann != null) {
                 for (int value : ann.value()) {
-                    if (value == requestCode && (ann.executeOnCancel() || resultCode == Activity.RESULT_OK)) {
+                    if (value == requestCode && ann.resultCode() == resultCode) {
                         invoke(m, target, data, resultCode);
                         return true;
                     }
