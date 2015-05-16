@@ -19,11 +19,12 @@ package com.levelmoney.velodrome.annotations;
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
+import static java.lang.annotation.ElementType.METHOD;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
-import static java.lang.annotation.ElementType.FIELD;
 
 @Retention(RUNTIME)
-@Target(FIELD)
+@Target(METHOD)
 public @interface HandleResult {
-
+    int[] value();
+    boolean executeOnCancel() default false;
 }
