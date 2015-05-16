@@ -16,16 +16,16 @@
 
 package com.levelmoney.velodrome;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.support.annotation.Nullable;
 
 import com.levelmoney.velodrome.annotations.HandleResult;
 
-import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 
 /**
- * It handles lots of lifecycle stuff. Get it?
+ * It handles lifecycle stuff. Get it?
  *
  * This is an attempt to streamline the awkwardness of dealing with request codes.
  * If it uses onActivityResult, it can probably benefit from this framework.
@@ -37,27 +37,44 @@ public final class Velodrome {
     /**
      * Call this method from onActivityResult
      */
-    public static boolean handleResult(Object target, int requestCode, int resultCode, @Nullable Intent data) {
-        if (resultCode != Activity.RESULT_OK) return false;
-        for (Field f : target.getClass().getDeclaredFields()) {
-            HandleResult h = f.getAnnotation(HandleResult.class);
-            if (h != null) {
-                boolean accessible = f.isAccessible();
-                try {
-                    // We can get rid of this when we switch to compile-time processing.
-                    f.setAccessible(true);
-                    ResultHandler v = (ResultHandler) f.get(target);
-                    if (v.requestCode() == requestCode) {
-                        v.handleResult(data);
+    public static synchronized boolean handleResult(Object target, int requestCode, int resultCode, @Nullable Intent data) {
+        for (Method m : target.getClass().getMethods()) {
+            HandleResult ann = m.getAnnotation(HandleResult.class);
+            if (ann != null) {
+                for (int value : ann.value()) {
+                    if (value == requestCode && ann.resultCode() == resultCode) {
+                        invoke(m, target, data, resultCode);
                         return true;
                     }
-                } catch (IllegalAccessException e) {
-                    throw new RuntimeException(e);
-                } finally {
-                    f.setAccessible(accessible);
                 }
             }
         }
         return false;
+    }
+
+    private static void invoke(Method m, Object target, Intent data, int resultCode) {
+        Class[] params = m.getParameterTypes();
+        Object[] args = new Object[params.length];
+        for (int i = 0; i < params.length; ++i) {
+            Class c = params[i];
+            if (c == int.class) {
+                args[i] = resultCode;
+            } else if (c == Intent.class) {
+                args[i] = data;
+            }
+        }
+        try {
+            m.invoke(target, args);
+        } catch (IllegalAccessException e) {
+            throw new VelodromeException(e);
+        } catch (InvocationTargetException e) {
+            throw new VelodromeException(e);
+        }
+    }
+
+    public static class VelodromeException extends RuntimeException {
+        public VelodromeException(Throwable throwable) {
+            super(throwable);
+        }
     }
 }

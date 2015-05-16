@@ -16,9 +16,9 @@
 
 package com.levelmoney.velodrome.sample;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,8 +27,6 @@ import android.widget.Toast;
 
 import com.levelmoney.velodrome.Velodrome;
 import com.levelmoney.velodrome.annotations.HandleResult;
-import com.levelmoney.velodrome.handlers.ActivityResultHandler;
-import com.levelmoney.velodrome.handlers.DialogFragmentResultHandler;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -39,26 +37,8 @@ import butterknife.OnClick;
  */
 public class VeloMainFragment extends Fragment {
 
-    private final int CODE_ACTIVITY = 1234;
-    private final int CODE_DIALOG = 100;
-
-    @HandleResult
-    private final ActivityResultHandler mActivity =
-            new ActivityResultHandler(this, CODE_ACTIVITY, EditTextActivity.class) {
-                @Override
-                public void handleResult(@Nullable Intent data) {
-                    Toast.makeText(getActivity(), data.getStringExtra("text"), Toast.LENGTH_LONG).show();
-                }
-            };
-
-    @HandleResult
-    private final DialogFragmentResultHandler mDialog =
-            new DialogFragmentResultHandler(this, CODE_DIALOG, VeloDialogFragment.class) {
-                @Override
-                public void handleResult(@Nullable Intent data) {
-                    Toast.makeText(getActivity(), "Confirmed", Toast.LENGTH_LONG).show();
-                }
-            };
+    private static final int CODE_ACTIVITY = 1234;
+    private static final int CODE_DIALOG = 100;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -73,12 +53,29 @@ public class VeloMainFragment extends Fragment {
 
     @OnClick(R.id.activity_button)
     public void onActivity() {
-        mActivity.go(null);
+        startActivityForResult(new Intent(getActivity(), EditTextActivity.class), CODE_ACTIVITY);
+    }
+
+    @HandleResult(CODE_ACTIVITY)
+    public void onActivityReturn(Intent data) {
+        Toast.makeText(getActivity(), data.getStringExtra("text"), Toast.LENGTH_LONG).show();
     }
 
     @OnClick(R.id.dialog_button)
     public void onDialog() {
-        mDialog.go(null);
+        VeloDialogFragment df = new VeloDialogFragment();
+        df.setTargetFragment(this, CODE_DIALOG);
+        df.show(getFragmentManager(), "velo");
+    }
+
+    @HandleResult(CODE_DIALOG)
+    public void onDialogReturn(Intent data) {
+        Toast.makeText(getActivity(), "Confirmed", Toast.LENGTH_LONG).show();
+    }
+
+    @HandleResult(value = CODE_DIALOG, resultCode = Activity.RESULT_CANCELED)
+    public void onDialogCancel(Intent data) {
+        Toast.makeText(getActivity(), "Canceled", Toast.LENGTH_LONG).show();
     }
 
     @Override
