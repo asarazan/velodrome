@@ -5,6 +5,7 @@ import android.content.Intent;
 
 import com.levelmoney.velodrome.Velodrome;
 import com.levelmoney.velodrome.annotations.HandleResult;
+import com.levelmoney.velodrome.annotations.HandleResults;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -47,7 +48,7 @@ public class VelodromeTests {
             mCanceled = true;
         }
 
-        @HandleResult({CODE_M1, CODE_M2})
+        @HandleResults({CODE_M1, CODE_M2})
         public void onMultiple(Intent data) {
             update(data);
         }

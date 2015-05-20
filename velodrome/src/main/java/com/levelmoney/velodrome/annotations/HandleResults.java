@@ -26,7 +26,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 @Retention(RUNTIME)
 @Target(METHOD)
-public @interface HandleResult {
-    int value();
+public @interface HandleResults {
+    int[] value();
     int resultCode() default Activity.RESULT_OK;
 }

@@ -19,6 +19,7 @@ package com.levelmoney.velodrome;
 import android.content.Intent;
 
 import com.levelmoney.velodrome.annotations.HandleResult;
+import com.levelmoney.velodrome.annotations.HandleResults;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -40,8 +41,15 @@ public final class Velodrome {
         for (Method m : target.getClass().getMethods()) {
             HandleResult ann = m.getAnnotation(HandleResult.class);
             if (ann != null) {
-                for (int value : ann.value()) {
-                    if (value == requestCode && ann.resultCode() == resultCode) {
+                if (ann.value() == requestCode && ann.resultCode() == resultCode) {
+                    invoke(m, target, data, resultCode);
+                    return true;
+                }
+            }
+            HandleResults anns = m.getAnnotation(HandleResults.class);
+            if (anns != null) {
+                for (int value : anns.value()) {
+                    if (value == requestCode && anns.resultCode() == resultCode) {
                         invoke(m, target, data, resultCode);
                         return true;
                     }
