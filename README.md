@@ -16,7 +16,7 @@ public void onActivityReturn(Intent data) {
     Log.d("Velo", data.getStringExtra("text"));
 }
 
-@HandleResult({2, 3})
+@HandleResults({2, 3})
 public void onMultipleCodes(Intent data) {
     Log.d("Velo", "one of two possible things just happened.");
 }
