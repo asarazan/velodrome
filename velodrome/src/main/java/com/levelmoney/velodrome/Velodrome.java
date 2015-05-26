@@ -25,8 +25,6 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 /**
- * It handles lifecycle stuff. Get it?
- *
  * This is an attempt to streamline the awkwardness of dealing with request codes.
  * If it uses onActivityResult, it can probably benefit from this framework.
  */
@@ -35,7 +33,17 @@ public final class Velodrome {
     private Velodrome() {}
 
     /**
-     * Call this method from onActivityResult
+     * Call this method from onActivityResult, and it will search for {@link HandleResult} of the same requestCode.
+     * Ex: Velodrome.handleResult(this, requestCode, resultCode, data);
+     *
+     * @param target the object which declares {@link HandleResult} methods.
+     * @param requestCode requestCode that was passed to the Dialog or Activity.
+     *                    Corresponds to 'value' on {@link HandleResult}
+     * @param resultCode By default, only Activity.RESULT_OK will be forwarded to result handlers.
+     *                   This can be overriden with the resultCode field on {@link HandleResult}
+     * @param data the result data intent.
+     *
+     * @return whether an appropriate handler was found.
      */
     public static synchronized boolean handleResult(Object target, int requestCode, int resultCode, Intent data) {
         for (Method m : target.getClass().getMethods()) {
