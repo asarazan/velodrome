@@ -27,14 +27,20 @@ import java.lang.reflect.Method;
 /**
  * This is an attempt to streamline the awkwardness of dealing with request codes.
  * If it uses onActivityResult, it can probably benefit from this framework.
+ *
+ * EXAMPLE:
+ * public void onActivityResult(int requestCode, int resultCode, Intent data) {
+ *      super.onActivityResult(requestCode, resultCode, data);
+ *      Velodrome.handleResult(this, requestCode, resultCode, data);
+ * }
  */
 public final class Velodrome {
 
     private Velodrome() {}
 
     /**
-     * Call this method from onActivityResult, and it will search for {@link HandleResult} of the same requestCode.
-     * Ex: Velodrome.handleResult(this, requestCode, resultCode, data);
+     * Call this method from onActivityResult
+     * and it will search for a {@link HandleResult} of the same requestCode.
      *
      * @param target the object which declares {@link HandleResult} methods.
      * @param requestCode requestCode that was passed to the Dialog or Activity.
