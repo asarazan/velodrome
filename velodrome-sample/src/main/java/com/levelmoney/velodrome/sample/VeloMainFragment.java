@@ -26,7 +26,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.levelmoney.velodrome.Velodrome;
-import com.levelmoney.velodrome.annotations.HandleResult;
+import com.levelmoney.velodrome.annotations.OnActivityResult;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -56,7 +56,7 @@ public class VeloMainFragment extends Fragment {
         startActivityForResult(new Intent(getActivity(), EditTextActivity.class), CODE_ACTIVITY);
     }
 
-    @HandleResult(CODE_ACTIVITY)
+    @OnActivityResult(CODE_ACTIVITY)
     public void onActivityReturn(Intent data) {
         Toast.makeText(getActivity(), data.getStringExtra("text"), Toast.LENGTH_LONG).show();
     }
@@ -68,12 +68,12 @@ public class VeloMainFragment extends Fragment {
         df.show(getFragmentManager(), "velo");
     }
 
-    @HandleResult(CODE_DIALOG)
+    @OnActivityResult(CODE_DIALOG)
     public void onDialogReturn(Intent data) {
         Toast.makeText(getActivity(), "Confirmed", Toast.LENGTH_LONG).show();
     }
 
-    @HandleResult(value = CODE_DIALOG, resultCode = Activity.RESULT_CANCELED)
+    @OnActivityResult(value = CODE_DIALOG, resultCode = Activity.RESULT_CANCELED)
     public void onDialogCancel(Intent data) {
         Toast.makeText(getActivity(), "Canceled", Toast.LENGTH_LONG).show();
     }

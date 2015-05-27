@@ -18,8 +18,7 @@ package com.levelmoney.velodrome;
 
 import android.content.Intent;
 
-import com.levelmoney.velodrome.annotations.HandleResult;
-import com.levelmoney.velodrome.annotations.HandleResults;
+import com.levelmoney.velodrome.annotations.OnActivityResult;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -40,27 +39,20 @@ public final class Velodrome {
 
     /**
      * Call this method from onActivityResult
-     * and it will search for a {@link HandleResult} of the same requestCode.
+     * and it will search for a {@link OnActivityResult} of the same requestCode.
      *
-     * @param target the object which declares {@link HandleResult} methods.
+     * @param target the object which declares {@link OnActivityResult} methods.
      * @param requestCode requestCode that was passed to the Dialog or Activity.
-     *                    Corresponds to 'value' on {@link HandleResult}
+     *                    Corresponds to 'value' on {@link OnActivityResult}
      * @param resultCode By default, only Activity.RESULT_OK will be forwarded to result handlers.
-     *                   This can be overriden with the resultCode field on {@link HandleResult}
+     *                   This can be overriden with the resultCode field on {@link OnActivityResult}
      * @param data the result data intent.
      *
      * @return whether an appropriate handler was found.
      */
     public static synchronized boolean handleResult(Object target, int requestCode, int resultCode, Intent data) {
         for (Method m : target.getClass().getMethods()) {
-            HandleResult ann = m.getAnnotation(HandleResult.class);
-            if (ann != null) {
-                if (ann.value() == requestCode && ann.resultCode() == resultCode) {
-                    invoke(m, target, data, resultCode);
-                    return true;
-                }
-            }
-            HandleResults anns = m.getAnnotation(HandleResults.class);
+            OnActivityResult anns = m.getAnnotation(OnActivityResult.class);
             if (anns != null) {
                 for (int value : anns.value()) {
                     if (value == requestCode && anns.resultCode() == resultCode) {

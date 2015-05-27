@@ -25,15 +25,15 @@ import static java.lang.annotation.ElementType.METHOD;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 /**
- * Declare a method as a result handler for a single request code.
+ * Declare a method as a result handler for multiple request codes.
  */
 @Retention(RUNTIME) @Target(METHOD)
-public @interface HandleResult {
+public @interface OnActivityResult {
 
     /**
-     * The requestCode that this method should respond to.
+     * The requestCodes that this method should respond to.
      */
-    int value();
+    int[] value();
 
     /**
      * If you specifically want to handle something other than RESULT_OK, pass it here.

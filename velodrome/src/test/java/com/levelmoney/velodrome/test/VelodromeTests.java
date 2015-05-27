@@ -4,8 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 
 import com.levelmoney.velodrome.Velodrome;
-import com.levelmoney.velodrome.annotations.HandleResult;
-import com.levelmoney.velodrome.annotations.HandleResults;
+import com.levelmoney.velodrome.annotations.OnActivityResult;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -38,17 +37,17 @@ public class VelodromeTests {
         private int mValue = 0;
         private boolean mCanceled = false;
 
-        @HandleResult(CODE)
+        @OnActivityResult(CODE)
         public void onResult(Intent data) {
             update(data);
         }
 
-        @HandleResult(value = CODE, resultCode = CANCEL)
+        @OnActivityResult(value = CODE, resultCode = CANCEL)
         public void onCancel(Intent data) {
             mCanceled = true;
         }
 
-        @HandleResults({CODE_M1, CODE_M2})
+        @OnActivityResult({CODE_M1, CODE_M2})
         public void onMultiple(Intent data) {
             update(data);
         }
