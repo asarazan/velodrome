@@ -77,7 +77,9 @@ public final class Velodrome {
         } catch (IllegalAccessException e) {
             throw new VelodromeException(e);
         } catch (InvocationTargetException e) {
-            throw new VelodromeException(e);
+            Throwable t = e.getTargetException();
+            if (t == null) t = e;
+            throw new VelodromeException(t);
         }
     }
 
