@@ -26,6 +26,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.levelmoney.velodrome.Velodrome;
+import com.levelmoney.velodrome.annotations.Arg;
 import com.levelmoney.velodrome.annotations.OnActivityResult;
 
 import butterknife.ButterKnife;
@@ -57,8 +58,8 @@ public class VeloMainFragment extends Fragment {
     }
 
     @OnActivityResult(CODE_ACTIVITY)
-    public void onActivityReturn(Intent data) {
-        Toast.makeText(getActivity(), data.getStringExtra("text"), Toast.LENGTH_LONG).show();
+    public void onActivityReturn(@Arg("text") String text) {
+        Toast.makeText(getActivity(), text, Toast.LENGTH_LONG).show();
     }
 
     @OnClick(R.id.dialog_button)

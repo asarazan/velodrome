@@ -1,1 +1,2 @@
 include ':velodrome', ':velodrome-sample'
+rootProject.name = 'velodrome-parent'
