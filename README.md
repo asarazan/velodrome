@@ -11,17 +11,23 @@ A more reasonable approach is to encapsulate each piece of callback behavior int
 ```java
 // In your fragment or activity class.
 
-@HandleResult(0)
+@OnActivityResult(0)
 public void onActivityReturn(Intent data) {
     Log.d("Velo", data.getStringExtra("text"));
 }
 
-@HandleResults({2, 3})
+// Velodrome can also extract simple values from the Intent using the @Arg annotation.
+@OnActivityResult(1)
+public void onActivityReturn(@Arg("text") String text, @Arg("someNum") int num) {
+    Log.d("Velo", "Text: " + text + " Num: " + someNum);
+}
+
+@OnActivityResult({2, 3})
 public void onMultipleCodes(Intent data) {
     Log.d("Velo", "one of two possible things just happened.");
 }
 
-@HandleResult(value = 1, resultCode = Activity.RESULT_CANCELED)
+@OnActivityResult(value = 4, resultCode = Activity.RESULT_CANCELED)
 public void onDialogCancel(Intent data) {
     Log.d("Velo", "Canceled");
 }
@@ -29,13 +35,13 @@ public void onDialogCancel(Intent data) {
 @Override
 public void onActivityResult(int requestCode, int resultCode, Intent data) {
     super.onActivityResult(requestCode, resultCode, data);
-    Velodrome.handleResult(this, requestCode, resultCode, data);
+    Velodrome.OnActivityResul(this, requestCode, resultCode, data);
 }
 ```
 
 ### Install
 ```gradle
 dependencies {
-    compile 'com.levelmoney.velodrome:velodrome:0.9-SNAPSHOT@aar'
+    compile 'com.levelmoney.velodrome:velodrome:0.9.1-SNAPSHOT@aar'
 }
 ```
