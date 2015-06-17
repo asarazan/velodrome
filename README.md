@@ -41,6 +41,13 @@ public void onActivityResult(int requestCode, int resultCode, Intent data) {
 }
 ```
 
+### Performance
+`Velodrome` uses reflection to resolve handler methods. This means it isn't blazing fast.
+That being said, we don't believe that the performance hit is substantial enough to warrant
+the pain of dealing with annotation processing.
+
+However, we wouldn't be sad if some intrepid soul were to submit a Pull Request :-)
+
 ### Install
 ```gradle
 dependencies {
