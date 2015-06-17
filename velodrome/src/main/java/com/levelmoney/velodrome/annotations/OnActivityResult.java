@@ -31,12 +31,12 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 public @interface OnActivityResult {
 
     /**
-     * The requestCodes that this method should respond to.
+     * @return The requestCodes that this method should respond to.
      */
     int[] value();
 
     /**
-     * If you specifically want to handle something other than RESULT_OK, pass it here.
+     * @return If you specifically want to handle something other than RESULT_OK, pass it here.
      */
     int resultCode() default Activity.RESULT_OK;
 }
