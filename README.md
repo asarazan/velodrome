@@ -16,7 +16,9 @@ public void onActivityReturn(Intent data) {
     Log.d("Velo", data.getStringExtra("text"));
 }
 
-// Velodrome can also extract simple values from the Intent using the @Arg annotation.
+// Velodrome can also extract simple values from the Intent
+// using the @Arg annotation.
+
 @OnActivityResult(1)
 public void onActivityReturn(@Arg("text") String text, @Arg("someNum") int num) {
     Log.d("Velo", "Text: " + text + " Num: " + someNum);
