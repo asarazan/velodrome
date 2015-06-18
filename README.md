@@ -6,38 +6,37 @@ One of the more horrible pieces of the Android lifecycle occurs inside `onActivi
 
 A more reasonable approach is to encapsulate each piece of callback behavior into its own handler method. That is precisely what [Velodrome](http://en.wikipedia.org/wiki/Velodrome) does.
 
-### Java Usage
+### Usage
 
 ```java
-// In your fragment or activity class.
+public static final int REQUEST_DELETE = 0;
+public static final int REQUEST_TEXT_ENTRY = 1;
 
-@OnActivityResult(0)
-public void onActivityReturn(Intent data) {
-    Log.d("Velo", data.getStringExtra("text"));
+@OnActivityResult(REQUEST_DELETE)
+public void onConfirmDelete() {
+	// Burn the world.
 }
 
-// Velodrome can also extract simple values from the Intent
-// using the @Arg annotation.
-
-@OnActivityResult(1)
-public void onActivityReturn(@Arg("text") String text, @Arg("someNum") int num) {
-    Log.d("Velo", "Text: " + text + " Num: " + someNum);
+@OnActivityResult(REQUEST_TEXT_ENTRY)
+public void onTextResult(@Arg("text") String text) {
+	// 'text' is automatically extracted from the data Intent.
 }
 
-@OnActivityResult({2, 3})
-public void onMultipleCodes(Intent data) {
-    Log.d("Velo", "one of two possible things just happened.");
+@OnActivityResult(value=REQUEST_TEXT_ENTRY, resultCode=Activity.RESULT_CANCELED)
+public void onTextAborted(Intent data) {
+	// Velodrome only fires on RESULT_OK by default. 
+	// You can override that behavior in the annotation args. 
+	// 'data' is the original data Intent passed to onActivityResult.
 }
 
-@OnActivityResult(value = 4, resultCode = Activity.RESULT_CANCELED)
-public void onDialogCancel(Intent data) {
-    Log.d("Velo", "Canceled");
+@OnActivityResult({100, 101})
+public void onOther() {
+    // You can even declare a single handler for multiple request codes, if that's your thing.
 }
 
 @Override
 public void onActivityResult(int requestCode, int resultCode, Intent data) {
-    super.onActivityResult(requestCode, resultCode, data);
-    Velodrome.OnActivityResul(this, requestCode, resultCode, data);
+    Velodrome.OnActivityResult(this, requestCode, resultCode, data);
 }
 ```
 
@@ -51,6 +50,6 @@ However, we wouldn't be sad if some intrepid soul were to submit a [pull request
 ### Install
 ```gradle
 dependencies {
-    compile 'com.levelmoney.velodrome:velodrome:0.9.1-SNAPSHOT@aar'
+    compile 'com.levelmoney.velodrome:velodrome:0.9.2@aar'
 }
 ```
