@@ -19,7 +19,7 @@
     </section>
 
     <section class="main-content">
-      <p>One of the more horrible pieces of the Android lifecycle occurs inside <code>onActivityResult</code>. It inevitably descends into a mess of switch statements and spaghetti. A more reasonable approach is to encapsulate each piece of callback behavior into its own handler method. That is precisely what Velodrome does.</p>
+      <p>One of the more painful pieces of the Android lifecycle occurs inside <code>onActivityResult</code>. It inevitably descends into a mess of switch statements and spaghetti. A more reasonable approach is to encapsulate each piece of callback behavior into its own handler method. That is precisely what Velodrome does.</p>
 
 <div class="highlight highlight-java"><pre><span class="pl-k">public</span> <span class="pl-k">static</span> <span class="pl-k">final</span> <span class="pl-k">int</span> <span class="pl-c1">REQUEST_DELETE</span> <span class="pl-k">=</span> <span class="pl-c1">0</span>;
 <span class="pl-k">public</span> <span class="pl-k">static</span> <span class="pl-k">final</span> <span class="pl-k">int</span> <span class="pl-c1">REQUEST_TEXT_ENTRY</span> <span class="pl-k">=</span> <span class="pl-c1">1</span>;
