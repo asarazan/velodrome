@@ -5,7 +5,7 @@ ext {
     bintrayName = 'velodrome'
     bintrayOrg = 'levelmoney'
 
-    publishedGroupId = 'com.levelmoney'
+    publishedGroupId = 'com.levelmoney.velodrome'
     libraryName = 'Velodrome'
     artifact = 'velodrome'
 
