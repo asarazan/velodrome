@@ -19,64 +19,36 @@
     </section>
 
     <section class="main-content">
-      <p>One of the more horrible pieces of the Android lifecycle occurs inside <code>onActivityResult</code>. It inevitably descends into a mess of switch statements and spaghetti.</p>
+      <p>One of the more horrible pieces of the Android lifecycle occurs inside <code>onActivityResult</code>. It inevitably descends into a mess of switch statements and spaghetti. A more reasonable approach is to encapsulate each piece of callback behavior into its own handler method. That is precisely what Velodrome does.</p>
 
-<div class="highlight highlight-java"><pre>
-<span class="pl-c">// This is bad!</span>
+<div class="highlight highlight-java"><pre><span class="pl-k">public</span> <span class="pl-k">static</span> <span class="pl-k">final</span> <span class="pl-k">int</span> <span class="pl-c1">REQUEST_DELETE</span> <span class="pl-k">=</span> <span class="pl-c1">0</span>;
+<span class="pl-k">public</span> <span class="pl-k">static</span> <span class="pl-k">final</span> <span class="pl-k">int</span> <span class="pl-c1">REQUEST_TEXT_ENTRY</span> <span class="pl-k">=</span> <span class="pl-c1">1</span>;
 
-@<span class="pl-smi">Override</span>
-<span class="pl-k">public</span> <span class="pl-k">void</span> onActivityResult(<span class="pl-k">int</span> requestCode, <span class="pl-k">int</span> resultCode, <span class="pl-smi">Intent</span> data) {
-    <span class="pl-k">if</span> (resultCode <span class="pl-k">!=</span> <span class="pl-smi">Activity</span><span class="pl-c1"><span class="pl-k">.</span>RESULT_OK</span>) {
-        <span class="pl-k">return</span>;
-    }
-    <span class="pl-k">switch</span> (requestCode) {
-        <span class="pl-k">case</span> <span class="pl-c1">EDIT_TEXT</span><span class="pl-k">:</span>
-            <span class="pl-smi">Log</span><span class="pl-k">.</span>d(<span class="pl-c1">TAG</span>, <span class="pl-s"><span class="pl-pds">"</span>EditText dialog returned <span class="pl-pds">"</span></span> <span class="pl-k">+</span> data<span class="pl-k">.</span>getStringExtra(<span class="pl-s"><span class="pl-pds">"</span>value<span class="pl-pds">"</span></span>));
-            <span class="pl-k">break</span>;
-        <span class="pl-k">case</span> <span class="pl-c1">DRILL_ACTIVITY</span><span class="pl-k">:</span>
-            <span class="pl-smi">Log</span><span class="pl-k">.</span>d(<span class="pl-c1">TAG</span>, <span class="pl-s"><span class="pl-pds">"</span>Some drilldown Activity returned<span class="pl-pds">"</span></span> <span class="pl-k">+</span> data<span class="pl-k">.</span>getParcelableExtra(<span class="pl-s"><span class="pl-pds">"</span>object<span class="pl-pds">"</span></span>));
-            <span class="pl-k">break</span>;
-        <span class="pl-k">case</span> <span class="pl-c1">DELETE_RESULT</span><span class="pl-k">:</span>
-            <span class="pl-smi">Log</span><span class="pl-k">.</span>d(<span class="pl-c1">TAG</span>, <span class="pl-s"><span class="pl-pds">"</span>Deletion successful<span class="pl-pds">"</span></span>);
-            <span class="pl-k">break</span>;
-        <span class="pl-k">case</span> <span class="pl-c1">RETICULATING_SPLINES</span><span class="pl-k">:</span>
-            <span class="pl-smi">Log</span><span class="pl-k">.</span>d(<span class="pl-c1">TAG</span>, <span class="pl-s"><span class="pl-pds">"</span>Splines reticulated<span class="pl-pds">"</span></span>);
-            <span class="pl-k">break</span>;
-        <span class="pl-k">default</span><span class="pl-k">:</span>
-            <span class="pl-smi">Log</span><span class="pl-k">.</span>d(<span class="pl-c1">TAG</span>, <span class="pl-s"><span class="pl-pds">"</span>Dunno<span class="pl-pds">"</span></span>);
-    }
-}</pre></div>
-
-<p>A more reasonable approach is to encapsulate each piece of callback behavior into its own handler method. That is precisely what Velodrome does.</p>
-
-<div class="highlight highlight-java"><pre><span class="pl-c">// In your fragment or activity class.</span>
-
-@OnActivityResult(<span class="pl-c1">0</span>)
-<span class="pl-k">public</span> <span class="pl-k">void</span> onActivityReturn(<span class="pl-smi">Intent</span> data) {
-    <span class="pl-smi">Log</span><span class="pl-k">.</span>d(<span class="pl-s"><span class="pl-pds">"</span>Velo<span class="pl-pds">"</span></span>, data<span class="pl-k">.</span>getStringExtra(<span class="pl-s"><span class="pl-pds">"</span>text<span class="pl-pds">"</span></span>));
+@OnActivityResult(<span class="pl-c1">REQUEST_DELETE</span>)
+<span class="pl-k">public</span> <span class="pl-k">void</span> onConfirmDelete() {
+    <span class="pl-c">// Burn the world.</span>
 }
 
-<span class="pl-c">// Velodrome can also extract simple values from the Intent</span>
-<span class="pl-c">// using the @Arg annotation.</span>
-@OnActivityResult(<span class="pl-c1">1</span>)
-<span class="pl-k">public</span> <span class="pl-k">void</span> onActivityReturn(@Arg(<span class="pl-s"><span class="pl-pds">"</span>text<span class="pl-pds">"</span></span>) <span class="pl-smi">String</span> text, @Arg(<span class="pl-s"><span class="pl-pds">"</span>someNum<span class="pl-pds">"</span></span>) <span class="pl-k">int</span> num) {
-    <span class="pl-smi">Log</span><span class="pl-k">.</span>d(<span class="pl-s"><span class="pl-pds">"</span>Velo<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>Text: <span class="pl-pds">"</span></span> <span class="pl-k">+</span> text <span class="pl-k">+</span> <span class="pl-s"><span class="pl-pds">"</span> Num: <span class="pl-pds">"</span></span> <span class="pl-k">+</span> someNum);
+@OnActivityResult(<span class="pl-c1">REQUEST_TEXT_ENTRY</span>)
+<span class="pl-k">public</span> <span class="pl-k">void</span> onTextResult(@Arg(<span class="pl-s"><span class="pl-pds">"</span>text<span class="pl-pds">"</span></span>) <span class="pl-smi">String</span> text) {
+    <span class="pl-c">// 'text' is automatically extracted from the data Intent.</span>
 }
 
-@OnActivityResult({<span class="pl-c1">2</span>, <span class="pl-c1">3</span>})
-<span class="pl-k">public</span> <span class="pl-k">void</span> onMultipleCodes(<span class="pl-smi">Intent</span> data) {
-    <span class="pl-smi">Log</span><span class="pl-k">.</span>d(<span class="pl-s"><span class="pl-pds">"</span>Velo<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>one of two possible things just happened.<span class="pl-pds">"</span></span>);
+@OnActivityResult(value<span class="pl-k">=</span><span class="pl-c1">REQUEST_TEXT_ENTRY</span>, resultCode<span class="pl-k">=</span><span class="pl-smi">Activity</span><span class="pl-c1"><span class="pl-k">.</span>RESULT_CANCELED</span>)
+<span class="pl-k">public</span> <span class="pl-k">void</span> onTextAborted(<span class="pl-smi">Intent</span> data) {
+    <span class="pl-c">// Velodrome only fires on RESULT_OK by default. </span>
+    <span class="pl-c">// You can override that behavior in the annotation args. </span>
+    <span class="pl-c">// 'data' is the original data Intent passed to onActivityResult.</span>
 }
 
-@OnActivityResult(value <span class="pl-k">=</span> <span class="pl-c1">4</span>, resultCode <span class="pl-k">=</span> <span class="pl-smi">Activity</span><span class="pl-c1"><span class="pl-k">.</span>RESULT_CANCELED</span>)
-<span class="pl-k">public</span> <span class="pl-k">void</span> onDialogCancel(<span class="pl-smi">Intent</span> data) {
-    <span class="pl-smi">Log</span><span class="pl-k">.</span>d(<span class="pl-s"><span class="pl-pds">"</span>Velo<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>Canceled<span class="pl-pds">"</span></span>);
+@OnActivityResult({<span class="pl-c1">100</span>, <span class="pl-c1">101</span>})
+<span class="pl-k">public</span> <span class="pl-k">void</span> onOther() {
+    <span class="pl-c">// You can even declare a single handler for multiple request codes, if that's your thing.</span>
 }
 
 @<span class="pl-smi">Override</span>
 <span class="pl-k">public</span> <span class="pl-k">void</span> onActivityResult(<span class="pl-k">int</span> requestCode, <span class="pl-k">int</span> resultCode, <span class="pl-smi">Intent</span> data) {
-    <span class="pl-v">super</span><span class="pl-k">.</span>onActivityResult(requestCode, resultCode, data);
-    <span class="pl-smi">Velodrome</span><span class="pl-k">.</span>handleResult(<span class="pl-v">this</span>, requestCode, resultCode, data);
+    <span class="pl-smi">Velodrome</span><span class="pl-k">.</span>OnActivityResult(<span class="pl-v">this</span>, requestCode, resultCode, data);
 }</pre></div>
 
 <h1>
@@ -92,7 +64,7 @@ the pain of dealing with annotation processing.</p>
 <a id="install" class="anchor" href="#install" aria-hidden="true"><span class="octicon octicon-link"></span></a>Install</h1>
 
 <div class="highlight highlight-gradle"><pre><span class="pl-en">dependencies</span> {
-    compile <span class="pl-s"><span class="pl-pds">'</span>com.levelmoney.velodrome:velodrome:0.9.1-SNAPSHOT@aar<span class="pl-pds">'</span></span>
+    compile <span class="pl-s"><span class="pl-pds">'</span>com.levelmoney.velodrome:velodrome:0.9.3@aar<span class="pl-pds">'</span></span>
 }</pre></div>
 
 <h1>
