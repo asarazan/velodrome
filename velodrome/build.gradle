@@ -1,5 +1,30 @@
 apply plugin: 'com.android.library'
 
+ext {
+    bintrayRepo = 'maven'
+    bintrayName = 'velodrome'
+    bintrayOrg = 'levelmoney'
+
+    publishedGroupId = 'com.levelmoney.velodrome'
+    libraryName = 'Velodrome'
+    artifact = 'velodrome'
+
+    libraryDescription = 'A small Android library that attempts to simplify the onActivityResult flow.'
+
+    siteUrl = 'https://github.com/levelmoney/velodrome'
+    gitUrl = 'https://github.com/levelmoney/velodrome.git'
+
+    libraryVersion = '0.9.3'
+
+    developerId = 'levelmoney'
+    developerName = 'Aaron Sarazan'
+    developerEmail = 'aaron@levelmoney.coom'
+
+    licenseName = 'The Apache Software License, Version 2.0'
+    licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+    allLicenses = ["Apache-2.0"]
+}
+
 android {
     compileSdkVersion 22
     buildToolsVersion "22.0.1"
@@ -16,9 +41,10 @@ android {
 }
 
 dependencies {
-    compile 'com.android.support:support-v4:22.1.1'
+    compile 'com.android.support:support-v4:22.2.0'
     testCompile 'junit:junit:4.12'
     testCompile 'org.robolectric:robolectric:3.0-rc2'
 }
 
-apply from: '../gradle/gradle-mvn-push.gradle'
+apply from: 'https://raw.githubusercontent.com/levelmoney/JCenter/master/installv1.gradle'
+apply from: 'https://raw.githubusercontent.com/levelmoney/JCenter/master/bintrayv1.gradle'
