@@ -6,7 +6,7 @@ Check out the [Velodrome](http://levelmoney.github.io/velodrome) page for more i
 # Install
 ```gradle
 dependencies {
-    compile 'com.levelmoney.velodrome:velodrome:0.9.2@aar'
+    compile 'com.levelmoney.velodrome:velodrome:0.9.3@aar'
 }
 ```
 
