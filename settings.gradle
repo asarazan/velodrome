@@ -1,2 +1,2 @@
-include ':velodrome', ':velodrome-sample'
+include ':library', ':sample'
 rootProject.name = 'parent'
