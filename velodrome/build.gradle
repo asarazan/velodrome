@@ -15,7 +15,7 @@ ext {
     gitUrl = 'https://github.com/levelmoney/velodrome.git'
     issueUrl = 'https://github.com/Levelmoney/velodrome/issues'
 
-    libraryVersion = '0.9.3'
+    libraryVersion = '1.0'
 
     developerId = 'levelmoney'
     developerName = 'Aaron Sarazan'
