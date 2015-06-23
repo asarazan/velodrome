@@ -21,4 +21,4 @@ before_script:
     - chmod +x gradlew
     - printf "bintray.user = \"\"\nbintray.apikey = \"\"\nbintray.gpg.password = \"\"\n" > gradle.properties
 
-script: "./gradlew build"
+script: "./gradlew assemble"
