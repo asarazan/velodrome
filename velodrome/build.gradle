@@ -44,7 +44,7 @@ android {
 dependencies {
     compile 'com.android.support:support-v4:22.2.0'
     testCompile 'junit:junit:4.12'
-    testCompile 'org.robolectric:robolectric:3.0-rc2'
+    testCompile 'org.robolectric:robolectric:3.0-rc3'
 }
 
 apply from: 'https://raw.githubusercontent.com/levelmoney/JCenter/master/installv1.gradle'

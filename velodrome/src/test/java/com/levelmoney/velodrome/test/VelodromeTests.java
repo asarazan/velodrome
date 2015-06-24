@@ -3,12 +3,13 @@ package com.levelmoney.velodrome.test;
 import android.app.Activity;
 import android.content.Intent;
 
+import com.levelmoney.velodrome.BuildConfig;
 import com.levelmoney.velodrome.Velodrome;
 import com.levelmoney.velodrome.annotations.OnActivityResult;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.robolectric.RobolectricTestRunner;
+import org.robolectric.RobolectricGradleTestRunner;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
 
@@ -21,8 +22,8 @@ import static org.junit.Assert.assertTrue;
  * Copyright(c) 2015 Level, Inc.
  */
 
-@RunWith(RobolectricTestRunner.class)
-@Config(emulateSdk=18, manifest="./src/main/AndroidManifest.xml")
+@RunWith(RobolectricGradleTestRunner.class)
+@Config(sdk = 18, constants = BuildConfig.class)
 public class VelodromeTests {
 
     private static final int OK = Activity.RESULT_OK;
