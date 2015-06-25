@@ -3,6 +3,8 @@ A small Android library that attempts to simplify the `onActivityResult` flow.
 
 Check out the [Velodrome](http://levelmoney.github.io/velodrome) page for more info.
 
+[![Build Status](https://travis-ci.org/Levelmoney/velodrome.svg)](https://travis-ci.org/Levelmoney/velodrome)
+
 # Install
 ```gradle
 dependencies {
