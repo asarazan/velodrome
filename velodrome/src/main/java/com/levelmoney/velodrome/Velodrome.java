@@ -25,6 +25,8 @@ import com.levelmoney.velodrome.annotations.OnActivityResult;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * This is an attempt to streamline the awkwardness of dealing with request codes.
@@ -40,6 +42,7 @@ public final class Velodrome {
 
     private Velodrome() {}
 
+    private static final Map<String, Method> METHOD_MAP = new HashMap<>();
     /**
      * Call this method from onActivityResult
      * and it will search for a {@link OnActivityResult} of the same requestCode.
@@ -54,11 +57,18 @@ public final class Velodrome {
      * @return whether an appropriate handler was found.
      */
     public static synchronized boolean handleResult(Object target, int requestCode, int resultCode, Intent data) {
+        String key = requestCode + target.getClass().getName() + resultCode;
+        Method method = METHOD_MAP.get(key);
+        if(method != null) {
+            invoke(method, target, data);
+            return true;
+        }
         for (Method m : target.getClass().getMethods()) {
             OnActivityResult anns = m.getAnnotation(OnActivityResult.class);
             if (anns != null) {
                 for (int value : anns.value()) {
                     if (value == requestCode && anns.resultCode() == resultCode) {
+                        METHOD_MAP.put(key, m);
                         invoke(m, target, data);
                         return true;
                     }
