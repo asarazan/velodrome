@@ -15,3 +15,11 @@
 #-keepclassmembers class fqcn.of.javascript.interface.for.webview {
 #   public *;
 #}
+
+# ButterKnife
+-dontwarn android.support.**
+-dontwarn butterknife.internal.**
+
+-keep class **$$ViewInjector { *; }
+-keepnames class * { @butterknife.InjectView *;}
+-keepclassmembers class * { @com.levelmoney.velodrome.annotations.OnActivityResult *; }
